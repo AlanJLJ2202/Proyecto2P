@@ -5,6 +5,8 @@
  */
 package View;
 
+import Bussines.Municipio;
+
 /**
  *
  * @author AJLJ-
@@ -16,6 +18,7 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
      */
     public frmMunicipios() {
         initComponents();
+        tMunicipios.setModel(new Municipio().GetAllModel());
     }
 
     /**
@@ -36,7 +39,7 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
         btnDescendente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tMunicipios = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
 
@@ -85,7 +88,7 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
         btnDescendente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnDescendente);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tMunicipios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -96,7 +99,7 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tMunicipios);
 
         jScrollPane1.setViewportView(jScrollPane2);
 
@@ -150,8 +153,8 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTable tMunicipios;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
