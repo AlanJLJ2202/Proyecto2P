@@ -1,9 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package View;
+
+import Bussines.Contactos;
+import Bussines.Estados;
+import Bussines.Municipio;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,13 +12,44 @@ package View;
  */
 public class nContactos extends javax.swing.JDialog {
 
-    /**
-     * Creates new form nContactos
-     */
+     private int idContacto = 0;
+    private Contactos contactos = new Contactos();
+    
+    
     public nContactos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
+    
+    public nContactos() {
+        
+        initComponents();
+        
+    }
+    
+     public nContactos(int idContacto) {
+        
+        initComponents();
+        this.idContacto = idContacto;
+        contactos.setIdContacto(idContacto);
+        contactos.GetById();
+        txtEntidad.setText(contactos.getEntidad());
+        txtCalle.setText(contactos.getCalle());
+        txtTelefono.setText(""+contactos.getTelefono());
+        txtCP.setText(contactos.getEntidad());
+        Nombres();
+    }
+     
+     public void Nombres(){
+        for(int i = 0; i< new Municipio().GetAllModel().getRowCount(); i++){
+            cbMunicipio.addItem("" + new Municipio().GetAllModel().getValueAt(i, 1));
+        }
+    }
+     
+     
+     
+     
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +86,11 @@ public class nContactos extends javax.swing.JDialog {
         jLabel5.setText("Telefono:");
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -123,6 +160,50 @@ public class nContactos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int idMunicipio = 0;
+        
+        
+            for(int i = 0; i< new Municipio().GetAllModel().getRowCount(); i++){ 
+                if(new Municipio().GetAllModel().getValueAt(i, 1).equals(cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()))){
+                    idMunicipio = Integer.parseInt("" + new Municipio().GetAllModel().getValueAt(i, 0));
+                    
+                }
+            }
+        
+        
+        if(contactos.getIdContacto()> 0){
+                
+                contactos.setMunicipio(idMunicipio);
+                contactos.setIdContacto(idContacto);
+                contactos.setEntidad(txtEntidad.getText());
+                contactos.setCalle(txtCalle.getText());
+                contactos.setCodigoPostal(Integer.parseInt(txtCP.getText()));
+                contactos.setEntidad(txtEntidad.getText());
+                
+                
+                if(contactos.Update()){
+                  JOptionPane.showMessageDialog(null,"Registro actualizado correctamente");
+                  this.dispose();
+                }
+            
+        }else{
+        
+        if(new Contactos(0,
+                        txtEntidad.getText(),
+                        idMunicipio,
+                        txtCalle.getText(),
+                        Integer.parseInt(txtCP.getText()),
+                        
+                 Integer.parseInt(txtTelefono.getText())
+                        ).add()){
+            JOptionPane.showMessageDialog(null,"Registro agregado correctamente");
+            this.dispose();
+        }
+        
+        } 
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments

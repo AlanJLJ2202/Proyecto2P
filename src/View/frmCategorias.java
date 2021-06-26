@@ -6,6 +6,7 @@
 package View;
 
 import Bussines.Categoria;
+import Bussines.Estados;
 import Data.DataAccess;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -195,7 +196,9 @@ public class frmCategorias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-      tCategorias.setModel(new Categoria().GetAllModel());
+      tCategorias.setModel(new Estados().GetAllModel());
+      JOptionPane.showMessageDialog(null, "Categorias actualizados correctamente");
+      
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed

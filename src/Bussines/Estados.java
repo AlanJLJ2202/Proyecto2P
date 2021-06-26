@@ -13,6 +13,7 @@ public class Estados {
     
    private int idEstado;
    private String estado;
+  
    
    public Estados(){
        
@@ -21,6 +22,7 @@ public class Estados {
     public Estados(int idEstado, String estado) {
         this.idEstado = idEstado;
         this.estado = estado;
+        
     }
 
     public DataAccess getDataAccess() {
@@ -46,15 +48,31 @@ public class Estados {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
+    
    
     public DefaultTableModel GetAllModel(){
-        String query = "SELECT * FROM dbo.Estados";
+        String query = "SELECT idEstado AS ID, estado AS Estado FROM dbo.Estados";
+        return dataAccess.Query(query);
+    }
+    
+    public DefaultTableModel Ascendente(){
+        String query = "SELECT idEstado AS ID, estado AS Nombre " +
+                          "FROM Estados " +
+                          "ORDER BY nombre ASC";
+        return dataAccess.Query(query);
+    }
+    
+    public DefaultTableModel Descendente(){
+        String query = "SELECT idEstado AS ID, estado AS Nombre " +
+                          "FROM Estados " +
+                          "ORDER BY nombre DESC";
         return dataAccess.Query(query);
     }
    
     public boolean add(){
-        String query = "INSERT INTO dbo.Estados(idEstado, estado) " +
-                "VALUES(" + idEstado + ",'" + estado + "');";
+        String query = "INSERT INTO dbo.Estados(estado) " +
+                "VALUES('" + estado + "');";
         return dataAccess.Execute(query) >= 1;        
     }
     
@@ -62,8 +80,8 @@ public class Estados {
      public boolean Update(){
     //update tabla set c1=v1 c2=v2 c3=v3;    
         String query = "UPDATE dbo.Estados SET " +
-                "idEstado = " + idEstado + ", " +
-                "estado = '" + estado + "', " +
+                
+                "estado = '" + estado + "' " +
                 
                
                 "WHERE idEstado = " +idEstado;      

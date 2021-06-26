@@ -83,7 +83,7 @@ public class Clientes {
      public boolean Update(){
     //update tabla set c1=v1 c2=v2 c3=v3;    
         String query = "UPDATE dbo.Clientes SET " +
-                "idCliente = " + idCliente + ", " +
+                
                 "nombre = '" + nombre + "', " +
                 "idContacto = " + idContacto + ", " +
                 "activo = " + activo + " " +

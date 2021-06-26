@@ -59,6 +59,11 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnNuevo);
 
         btnModificar.setText("Modificar");
@@ -138,6 +143,10 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

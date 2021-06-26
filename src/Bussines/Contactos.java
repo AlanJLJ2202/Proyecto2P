@@ -13,7 +13,7 @@ public class Contactos {
     
     private int idContacto;
     private String entidad;
-    private int idLocalidad;
+    private int idMunicipio;
     private String calle;
     private int codigoPostal;
     private int telefono;
@@ -22,10 +22,10 @@ public class Contactos {
         
     }
 
-    public Contactos(int idContacto, String entidad, int idLocalidad, String calle, int codigoPostal, int telefono) {
+    public Contactos(int idContacto, String entidad, int idMunicipio, String calle, int codigoPostal, int telefono) {
         this.idContacto = idContacto;
         this.entidad = entidad;
-        this.idLocalidad = idLocalidad;
+        this.idMunicipio = idMunicipio;
         this.codigoPostal = codigoPostal;
         this.calle = calle;
         this.telefono = telefono;
@@ -65,11 +65,11 @@ public class Contactos {
     }
 
     public int getMunicipio() {
-        return idLocalidad;
+        return idMunicipio;
     }
 
     public void setMunicipio(int idMunicipio) {
-        this.idLocalidad = idMunicipio;
+        this.idMunicipio = idMunicipio;
     }
 
     public String getCalle() {
@@ -95,7 +95,7 @@ public class Contactos {
    
     public boolean add(){
         String query = "INSERT INTO dbo.Contactos(entidad, idMunicipio, calle, codigoPostal, telefono) " +
-                "VALUES('" + entidad +"," + idLocalidad + ",'" + calle + "'," + codigoPostal + "," + telefono + ");";
+                "VALUES('" + entidad +"," + idMunicipio + ",'" + calle + "'," + codigoPostal + "," + telefono + ");";
         return dataAccess.Execute(query) >= 1;        
     }
     
@@ -103,9 +103,8 @@ public class Contactos {
      public boolean Update(){
     //update tabla set c1=v1 c2=v2 c3=v3;    
         String query = "UPDATE dbo.Contactos SET " +
-                "idContacto = " + idContacto + ", " +
                 "entidad = '" + entidad + "', " +
-                "idMunicipio = " + idLocalidad + ", " +
+                "idMunicipio = " + idMunicipio + ", " +
                 "calle = '" + calle + "', " +
                 "codigoPostal = " + codigoPostal + ", " +
                 "telefono = " + telefono + " " +
@@ -124,7 +123,7 @@ public class Contactos {
         DefaultTableModel res = dataAccess.Query(query);
         idContacto= (int)res.getValueAt(0, 0);
         entidad = (String)res.getValueAt(0, 1);
-        idLocalidad = (int)res.getValueAt(0, 2);
+        idMunicipio = (int)res.getValueAt(0, 2);
         calle = (String)res.getValueAt(0, 3);
         codigoPostal = (int)res.getValueAt(0, 4);
         telefono = (int)res.getValueAt(0, 5);
