@@ -6,6 +6,7 @@
 package View;
 
 import Bussines.Localidades;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,36 +57,66 @@ public class frmLocalidades extends javax.swing.JInternalFrame {
         btnActualizar.setFocusable(false);
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnActualizar);
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnNuevo);
 
         btnModificar.setText("Modificar");
         btnModificar.setFocusable(false);
         btnModificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnModificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnModificar);
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnEliminar);
 
         btnAscendente.setText("Ascendente");
         btnAscendente.setFocusable(false);
         btnAscendente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAscendente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAscendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAscendenteActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnAscendente);
 
         btnDescendente.setText("Descendente");
         btnDescendente.setFocusable(false);
         btnDescendente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDescendente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDescendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescendenteActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnDescendente);
 
         tLocalidades.setModel(new javax.swing.table.DefaultTableModel(
@@ -143,6 +174,59 @@ public class frmLocalidades extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        tLocalidades.setModel(new Localidades().GetAllModel());
+        JOptionPane.showMessageDialog(null, "Registros actualizados correctamente");
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        nLocalidades nl = new nLocalidades();
+        nl.setTitle("Nueva Localidad");
+        nl.setModal(true);
+        nl.setVisible(true);
+        tLocalidades.setModel(new Localidades().GetAllModel());
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if(tLocalidades.getSelectedRow() > 0){
+            int idLocalidad = (int) tLocalidades.getValueAt(tLocalidades.getSelectedRow(), 0);
+            nLocalidades nl = new nLocalidades(idLocalidad);
+            nl.setTitle("Modificar Localidad");
+            nl.setModal(true);
+            nl.setVisible(true);
+            tLocalidades.setModel(new Localidades().GetAllModel());
+                    
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Debes seleccionar un registro");
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if(tLocalidades.getSelectedRow() >= 0){
+          int idLocalidad = (int) tLocalidades.getValueAt(tLocalidades.getSelectedRow(), 0);
+          Localidades cat = new Localidades();
+          cat.setIdLocalidad(idLocalidad);
+          cat.Delete();
+          tLocalidades.setModel(new Localidades().GetAllModel());
+      }else{
+          JOptionPane.showMessageDialog(null, "Selecciona un registro porfavor");
+      }
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAscendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAscendenteActionPerformed
+        tLocalidades.setModel(new Localidades().Ascendente());
+    }//GEN-LAST:event_btnAscendenteActionPerformed
+
+    private void btnDescendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescendenteActionPerformed
+        tLocalidades.setModel(new Localidades().Descendente());
+    }//GEN-LAST:event_btnDescendenteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

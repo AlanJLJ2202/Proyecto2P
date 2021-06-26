@@ -25,7 +25,6 @@ public class nCategorias extends javax.swing.JDialog {
     }
     
     public nCategorias() {
-        
         initComponents();
     }
 
@@ -35,7 +34,6 @@ public class nCategorias extends javax.swing.JDialog {
         categorias.setIdCategoria(idCategoria);
         categorias.GetById();
         txtNombre.setText(categorias.getNombre());
-        
     }
     
     

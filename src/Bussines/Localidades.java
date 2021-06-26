@@ -57,13 +57,32 @@ public class Localidades {
     }
     
      public DefaultTableModel GetAllModel(){
-        String query = "SELECT * FROM dbo.Localidades";
+        String query = "SELECT idLocalidad AS ID, " +
+                        " localidad AS Localidad," +
+                        " idMunicipio AS Municipio " +
+                         "FROM dbo.Localidades";
+        return dataAccess.Query(query);
+    }
+     
+       public DefaultTableModel Ascendente(){
+         String query = "SELECT idLocalidad AS ID, localidad AS Localidad, " +
+                          "idMunicipio AS Municipio " +
+                          "FROM Localidades " +
+                          "ORDER BY localidad ASC";
+        return dataAccess.Query(query);
+    }
+       
+         public DefaultTableModel Descendente(){
+         String query = "SELECT idLocalidad AS ID, localidad AS Localidad, " +
+                          "idMunicipio AS Municipio " +
+                          "FROM Localidades " +
+                          "ORDER BY localidad DESC";
         return dataAccess.Query(query);
     }
    
     public boolean add(){
-        String query = "INSERT INTO dbo.Localidades(idLocalidad, idMunicipio, localidad) " +
-                "VALUES(" + idLocalidad + "," + idMunicipio + ",'" + localidad + "');";
+        String query = "INSERT INTO dbo.Localidades(idMunicipio, localidad) " +
+                "VALUES("+ idMunicipio + ",'" + localidad + "');";
         return dataAccess.Execute(query) >= 1;        
     }
     
@@ -71,7 +90,7 @@ public class Localidades {
      public boolean Update(){
     //update tabla set c1=v1 c2=v2 c3=v3;    
         String query = "UPDATE dbo.Localidades SET " +
-                "idLocalidad = " + idLocalidad + ", " +
+                
                 "idMunicipio = " + idMunicipio + ", " +
                 "localidad = '" + localidad + "' " +
                 

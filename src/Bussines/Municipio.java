@@ -61,8 +61,8 @@ public class Municipio {
     }
    
     public boolean add(){
-        String query = "INSERT INTO dbo.Municipios(idMunicipio, idEstado, municipio) " +
-                "VALUES(" + idMunicipio + "," + idEstado + ",'" + municipio + "');";
+        String query = "INSERT INTO dbo.Municipios(idEstado, municipio) " +
+                "VALUES(" + idEstado + ",'" + municipio + "');";
         return dataAccess.Execute(query) >= 1;        
     }
     
@@ -70,7 +70,7 @@ public class Municipio {
      public boolean Update(){
     //update tabla set c1=v1 c2=v2 c3=v3;    
         String query = "UPDATE dbo.Municipios SET " +
-                "idMunicipio = " + idMunicipio + ", " +
+                
                 "idEstado = " + idEstado + ", " +
                 "municipio = '" + municipio + "' " +
                 

@@ -5,20 +5,51 @@
  */
 package View;
 
+import Bussines.Categoria;
+import Bussines.Clientes;
+import Bussines.Contactos;
+import Bussines.Localidades;
+import Bussines.Municipio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author AJLJ-
  */
 public class nLocalidades extends javax.swing.JDialog {
 
-    /**
-     * Creates new form nLocalidades
-     */
+    
+     private int idLocalidad = 0;
+    private Localidades localidades = new Localidades();
+    
+    
+    
     public nLocalidades(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
+    public nLocalidades(){ 
+      initComponents();
+      llenarCombo();
+    }    
+    
+    public nLocalidades(int idLocalidad){
+        initComponents();
+        this.idLocalidad = idLocalidad;
+        localidades.GetById();
+        txtNombre.setText(localidades.getLocalidad());
+        llenarCombo();
+    }
+    
+    
+    
+    public void llenarCombo(){
+        for(int i = 0; i< new Municipio().GetAllModel().getRowCount(); i++){
+            cbMunicipio.addItem("" + new Municipio().GetAllModel().getValueAt(i, 2));
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +79,11 @@ public class nLocalidades extends javax.swing.JDialog {
         jLabel2.setText("Municipio:");
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -99,6 +135,46 @@ public class nLocalidades extends javax.swing.JDialog {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int idMunicipio = 0;
+        
+        for(int i = 0; i< new Municipio().GetAllModel().getRowCount(); i++){ 
+                if(new Municipio().GetAllModel().getValueAt(i, 2).equals(cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()))){
+                    idMunicipio = Integer.parseInt("" + new Municipio().GetAllModel().getValueAt(i, 0));
+                   
+                }
+            }
+        
+         if(localidades.getIdLocalidad()> 0){
+                
+                
+                localidades.setIdLocalidad(idLocalidad);
+                localidades.setIdMunicipio(idMunicipio);
+                localidades.setLocalidad(txtNombre.getText());
+                cbMunicipio.setSelectedIndex(idMunicipio);
+               // clientes.setActivo(1);
+                
+                if(localidades.Update()){
+                  JOptionPane.showMessageDialog(null,"Registro actualizado correctamente");
+                  this.dispose();
+                }
+            
+        }else{
+        
+        if(new Localidades(0,
+                        idMunicipio,
+                        txtNombre.getText()
+                        ).add()){
+            JOptionPane.showMessageDialog(null,"Registro agregado correctamente");
+            this.dispose();
+        }
+        
+        } 
+        
+        
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments
