@@ -21,7 +21,8 @@ public class nLocalidades extends javax.swing.JDialog {
     
      private int idLocalidad = 0;
     private Localidades localidades = new Localidades();
-    
+     private int idMunicipio = 0;
+     private String nombreM = "";
     
     
     public nLocalidades(java.awt.Frame parent, boolean modal) {
@@ -35,11 +36,18 @@ public class nLocalidades extends javax.swing.JDialog {
     }    
     
     public nLocalidades(int idLocalidad){
+       
         initComponents();
         this.idLocalidad = idLocalidad;
+        localidades.setIdLocalidad(idLocalidad);
         localidades.GetById();
         txtNombre.setText(localidades.getLocalidad());
         llenarCombo();
+        
+    }
+    
+    public void seleccion(){
+        cbMunicipio.addItem("" + new Municipio().GetAllModel().getValueAt(ERROR, WIDTH));
     }
     
     
@@ -137,22 +145,22 @@ public class nLocalidades extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        int idMunicipio = 0;
+        
         
         for(int i = 0; i< new Municipio().GetAllModel().getRowCount(); i++){ 
                 if(new Municipio().GetAllModel().getValueAt(i, 2).equals(cbMunicipio.getItemAt(cbMunicipio.getSelectedIndex()))){
                     idMunicipio = Integer.parseInt("" + new Municipio().GetAllModel().getValueAt(i, 0));
-                   
+                    //nombreM = ("" + new Municipio().GetAllModel().getValueAt(i, 2));
                 }
             }
         
          if(localidades.getIdLocalidad()> 0){
                 
                 
-                localidades.setIdLocalidad(idLocalidad);
+                //localidades.setIdLocalidad(idLocalidad);
                 localidades.setIdMunicipio(idMunicipio);
                 localidades.setLocalidad(txtNombre.getText());
-                cbMunicipio.setSelectedIndex(idMunicipio);
+               // cbMunicipio.setSelectedIndex(idMunicipio);
                // clientes.setActivo(1);
                 
                 if(localidades.Update()){

@@ -59,6 +59,20 @@ public class Municipio {
         String query = "SELECT * FROM dbo.Municipios";
         return dataAccess.Query(query);
     }
+     
+     public DefaultTableModel Ascendente(){
+         String query = "SELECT idMunicipio AS ID, idEstado AS Estado, municipio AS Municipio " +
+                          "FROM Municipios " +
+                          "ORDER BY nombre ASC";
+        return dataAccess.Query(query);
+    }
+     
+     public DefaultTableModel Descendente(){
+         String query = "SELECT idMunicipio AS ID, idEstado AS Estado, municipio AS Municipio " +
+                          "FROM Municipios " +
+                          "ORDER BY nombre DESC";
+        return dataAccess.Query(query);
+    }
    
     public boolean add(){
         String query = "INSERT INTO dbo.Municipios(idEstado, municipio) " +

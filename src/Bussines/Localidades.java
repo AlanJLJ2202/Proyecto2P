@@ -94,7 +94,7 @@ public class Localidades {
                 "idMunicipio = " + idMunicipio + ", " +
                 "localidad = '" + localidad + "' " +
                 
-                "WHERE idLocalidad = " +idLocalidad;      
+                "WHERE idLocalidad = " + idLocalidad;      
         return dataAccess.Execute(query) >= 1; 
     }
     
@@ -109,7 +109,6 @@ public class Localidades {
         idLocalidad= (int)res.getValueAt(0, 0);
         idMunicipio = (int)res.getValueAt(0, 1);
         localidad = (String)res.getValueAt(0, 2);
-        
         
     }
 }

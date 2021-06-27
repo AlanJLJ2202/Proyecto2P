@@ -43,7 +43,7 @@ public class nClientes extends javax.swing.JDialog {
         clientes.setIdCliente(idCliente);
         clientes.GetById();
         txtNombre.setText(clientes.getNombre());
-        //cbContactos.setSelectedItem(seleccion);
+        llenarCombo();
     
     }
     

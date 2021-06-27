@@ -6,6 +6,7 @@
 package View;
 
 import Bussines.Municipio;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,36 +57,66 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
         btnActualizar.setFocusable(false);
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnActualizar);
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnNuevo);
 
         btnModificar.setText("Modificar");
         btnModificar.setFocusable(false);
         btnModificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnModificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnModificar);
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnEliminar);
 
         btnAscendente.setText("Ascendente");
         btnAscendente.setFocusable(false);
         btnAscendente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAscendente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAscendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAscendenteActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnAscendente);
 
         btnDescendente.setText("Descendente");
         btnDescendente.setFocusable(false);
         btnDescendente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDescendente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDescendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescendenteActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnDescendente);
 
         tMunicipios.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,7 +173,59 @@ public class frmMunicipios extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+       tMunicipios.setModel(new Municipio().GetAllModel());
+        JOptionPane.showMessageDialog(null, "Registros actualizados correctamente");
+                
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+       nMunicipios nm = new nMunicipios();
+        nm.setTitle("Nuevo Municipio");
+        nm.setModal(true);
+        nm.setVisible(true);
+        tMunicipios.setModel(new Municipio().GetAllModel());
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+      if(tMunicipios.getSelectedRow()>= 0){
+            int idMunicipio = (int) tMunicipios.getValueAt(tMunicipios.getSelectedRow(), 0);
+             nMunicipios nm = new nMunicipios(idMunicipio);
+             nm.setTitle("Modificar Municipio");
+             nm.setModal(true);
+             nm.setVisible(true);
+            tMunicipios.setModel(new Municipio().GetAllModel());
+
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Debes seleccionar un registro");
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       if(tMunicipios.getSelectedRow() >= 0){
+          int idMunicipio = (int) tMunicipios.getValueAt(tMunicipios.getSelectedRow(), 0);
+          Municipio cat = new Municipio();
+          cat.setIdMunicipio(idMunicipio);
+          cat.Delete();
+          tMunicipios.setModel(new Municipio().GetAllModel());
+      }else{
+          JOptionPane.showMessageDialog(null, "Selecciona un registro porfavor");
+      }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAscendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAscendenteActionPerformed
+        tMunicipios.setModel(new Municipio().Ascendente());
+    }//GEN-LAST:event_btnAscendenteActionPerformed
+
+    private void btnDescendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescendenteActionPerformed
+       tMunicipios.setModel(new Municipio().Descendente());
+    }//GEN-LAST:event_btnDescendenteActionPerformed
+
+
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAscendente;
